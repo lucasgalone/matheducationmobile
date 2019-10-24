@@ -7,10 +7,10 @@ import { updateProfileSuccess, updateProfileFailure } from './actions';
 
 export function* updateProfile({ payload }) {
   try {
-    const { nome, email, avatar_id, ...rest } = payload.data;
+    const { nome, email, ...rest } = payload.data;
 
     const profile = Object.assign(
-      { nome, email, avatar_id },
+      { nome, email },
       rest.oldPassword ? rest : {}
     );
 
@@ -22,7 +22,7 @@ export function* updateProfile({ payload }) {
   } catch (err) {
     Alert.alert(
       'Falha na atualização',
-      'Houve um erro na atualização do pergil, verifique seus dados!'
+      'Houve um erro na atualização do perfil, verifique seus dados!'
     );
     yield put(updateProfileFailure());
   }
