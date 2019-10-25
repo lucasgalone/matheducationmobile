@@ -4,21 +4,23 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, Left, Avatar, Info, Name, Time } from './styles';
 
-export default function Appointment() {
+export default function Conta(obj) {
   return (
     <Container>
       <Left>
         <Avatar
-          source={{ uri: 'https://api.adorable.io/avatar50/rocketseat.png' }}
+          source={{
+            uri: `https://api.adorable.io/avatar/50/${obj.data.item.conta}.png`,
+          }}
         />
-
         <Info>
-          <Name>Lucas Vinicius Galone</Name>
-          <Time>Em 3 horas</Time>
+          <Name>{obj.data.item.conta}</Name>
         </Info>
       </Left>
 
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity
+        onPress={() => obj.data.navigation.navigate('Atividade')}
+      >
         <Icon name="create" size={20} color="#f64c75" />
       </TouchableOpacity>
     </Container>

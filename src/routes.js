@@ -1,12 +1,13 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-// import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Atividade from './pages/Atividade';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -32,19 +33,12 @@ export default (isSigned = false) =>
             },
           }
         ),
+        Atividade: createStackNavigator({
+          Atividade,
+        }),
       },
       {
         initialRouteName: isSigned ? 'App' : 'Sign',
       }
-      // {
-      //   headerLayoutPreset: 'center',
-      //   headerBackTitleVisible: false,
-      //   defaultNavigationOptions: {
-      //     headerStyle: {
-      //       backgroundColor: '#fd7a0a',
-      //     },
-      //     headerTintColor: '#FFF',
-      //   },
-      // }
     )
   );

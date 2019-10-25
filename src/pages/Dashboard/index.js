@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../services/api';
 
 import Background from '../../componenets/Background';
-import Appointment from '../../componenets/Appointment';
+import Conta from '../../componenets/Conta';
 
 import { Container, Title, List } from './styles';
 
-const data = [1, 2, 3, 4, 5];
+export default function Dashboard({ navigation }) {
+  const profile = useSelector(state => state.user.profile);
+  const [contas, setContas] = useState([]);
+  useEffect(() => {
+    async function loadContas() {
+      const response = await api.get(`contaturma/${profile.id}`);
+      setContas(response.data);
+    }
+    loadContas();
+  }, []);
 
-export default function Dashboard() {
   return (
     <Background>
       <Container>
         <Title>Atividades</Title>
         <List
-          data={data}
-          keyExtractor={item => String(item)}
-          renderItem={({ item }) => <Appointment data={item} />}
+          data={contas}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => <Conta data={{ item, navigation }} />}
         />
       </Container>
     </Background>
