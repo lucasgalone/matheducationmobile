@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'matheducation',
       storage: AsyncStorage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth', 'user', 'atividade'],
     },
     reducers
   );

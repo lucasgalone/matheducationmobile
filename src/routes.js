@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
 
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
@@ -15,7 +14,6 @@ export default (isSigned = false) =>
       {
         Sign: createSwitchNavigator({
           SignIn,
-          SignUp,
         }),
         App: createBottomTabNavigator(
           {
@@ -33,9 +31,21 @@ export default (isSigned = false) =>
             },
           }
         ),
-        Atividade: createStackNavigator({
-          Atividade,
-        }),
+        Atividade: createStackNavigator(
+          {
+            Atividade,
+          },
+          {
+            headerLayoutPreset: 'center',
+            headerBackTitleVisible: false,
+            defaultNavigationOptions: {
+              headerStyle: {
+                backgroundColor: '#fd7a0a',
+              },
+              headerTintColor: '#FFF',
+            },
+          }
+        ),
       },
       {
         initialRouteName: isSigned ? 'App' : 'Sign',
