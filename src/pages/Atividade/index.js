@@ -3,22 +3,24 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { updateScoreUserRequest } from '../../store/modules/user/actions';
 
-import { Container, RespostaList, Resposta, Name } from './styles';
+import { Container, RespostaList, Nivel, Resposta, Name } from './styles';
 import Background from '../../componenets/Background';
 import api from '../../services/api';
 
 export default function Atividade({ navigation }) {
+  const dispatch = useDispatch();
   const idtipoconta = useSelector(state => state.atividade.idtipoconta);
+  const profile = useSelector(state => state.user.profile);
+
   const [listAtividades, setListAtividades] = useState([]);
   const [atividades, setAtividades] = useState({});
-  const [idnivel, setIdNivel] = useState(1);
-
+  const [idnivel, setIdNivel] = useState(2);
   useEffect(() => {
     async function loadAtividades() {
       const response = await api.get(`atividades/${idtipoconta}`);
-      setAtividades(response.data.filter(x => x.nivel == idnivel)[0]);
-      setIdNivel(idnivel + 1);
+      setAtividades(response.data.filter(x => x.nivel == 1)[0]);
       setListAtividades(response.data);
     }
 
@@ -27,24 +29,33 @@ export default function Atividade({ navigation }) {
 
   function handleConfirmRes(result) {
     if (atividades.resposta == result) {
-      setIdNivel(idnivel + 1);
+      dispatch(updateScoreUserRequest(profile.email, idnivel - 1));
       if (idnivel <= 3) {
         setAtividades(listAtividades.filter(x => x.nivel == idnivel)[0]);
         Alert.alert('Parabéns você acertou!');
+        setIdNivel(idnivel + 1);
       } else {
-        Alert.alert('FIM DE JOGO');
         navigation.navigate('Dashboard');
+        Alert.alert('Fim do game!');
       }
     } else {
-      Alert.alert(
-        `Que pena você errou! A resposta correta é ${atividades.resposta}`
-      );
+      if (idnivel <= 3) {
+        setIdNivel(idnivel + 1);
+        setAtividades(listAtividades.filter(x => x.nivel == idnivel)[0]);
+        Alert.alert(
+          `Que pena você errou! A resposta correta é ${atividades.resposta}`
+        );
+      } else {
+        navigation.navigate('Dashboard');
+        Alert.alert('Fim do game!');
+      }
     }
   }
 
   return (
     <Background>
       <Container>
+        <Nivel>Nivel: {idnivel - 1}</Nivel>
         <Descricao>{atividades.descricao}</Descricao>
         <RespostaList
           data={atividades.respostas}

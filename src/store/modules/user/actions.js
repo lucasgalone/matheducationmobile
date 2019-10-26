@@ -17,3 +17,10 @@ export function updateProfileFailure() {
     type: '@user/UPDATE_FAILURE_REQUEST',
   };
 }
+
+export function updateScoreUserRequest(email, score) {
+  return {
+    type: '@user/UPDATE_SCORE_USER_REQUEST',
+    payload: { email, score },
+  };
+}

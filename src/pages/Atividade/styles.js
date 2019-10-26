@@ -5,6 +5,14 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
+export const Nivel = styled.Text`
+  margin-top: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+`;
+
 export default Descricao = styled.Text`
   margin-top: 60px;
   font-size: 50px;

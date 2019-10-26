@@ -28,4 +28,22 @@ export function* updateProfile({ payload }) {
   }
 }
 
-export default all([takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile)]);
+export function* updateScoreProfile({ payload }) {
+  try {
+    const { email, score } = payload;
+
+    const profile = Object.assign({ email, score });
+
+    const response = yield call(api.put, 'users', profile);
+
+    yield put(updateProfileSuccess(response.data));
+  } catch (err) {
+    Alert.alert('Erro inesperado!', 'Entre em contato com o responsável!');
+    yield put(updateProfileFailure());
+  }
+}
+
+export default all([
+  takeLatest('@user/UPDATE_PROFILE_REQUEST', updateProfile),
+  takeLatest('@user/UPDATE_SCORE_USER_REQUEST', updateScoreProfile),
+]);
