@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Atividade from './pages/Atividade';
+import Score from './pages/Score';
 
 export default (isSigned = false) =>
   createAppContainer(
@@ -18,6 +19,7 @@ export default (isSigned = false) =>
         App: createBottomTabNavigator(
           {
             Dashboard,
+            Score,
             Profile,
           },
           {
