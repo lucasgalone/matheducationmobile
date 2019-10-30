@@ -22,7 +22,7 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     protected String getJSBundleFile() {
-      return CodePush.getJSBundleFile(BuildConfig.CODEPUSH_KEY);
+      return CodePush.getJSBundleFile();
     }
 
     @Override
