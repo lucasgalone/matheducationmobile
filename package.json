@@ -13,7 +13,7 @@
     "@react-navigation/bottom-tabs": "^5.0.0-alpha.15",
     "@react-navigation/core": "^5.0.0-alpha.17",
     "async-storage": "^0.1.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "immer": "^4.0.2",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
