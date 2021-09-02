@@ -14,7 +14,7 @@
     "@react-navigation/core": "^5.0.0-alpha.17",
     "async-storage": "^0.1.0",
     "axios": "^0.19.0",
-    "immer": "^4.0.2",
+    "immer": "^9.0.6",
     "prop-types": "^15.7.2",
     "react": "16.8.6",
     "react-button-slider": "^1.2.0",
